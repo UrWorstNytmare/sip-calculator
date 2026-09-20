@@ -7,6 +7,14 @@ const MAX_AMOUNT = 10000000;
 const MAX_RETURN_PCT = 100;
 const MAX_YEARS = 80;
 const MAX_STEP_UP = 50;
+const LTCG_EXEMPTION = 125000;
+const LTCG_RATE = 0.125;
+const STCG_RATE = 0.20;
+
+function toNum(v, fallback = 0) {
+  const n = Number(v);
+  return isNaN(n) ? fallback : n;
+}
 
 // mfapi.in history is sorted newest-first ("DD-MM-YYYY"). Real SIP allotment
 // uses the NEXT trading day's NAV if the chosen date isn't a trading day.
@@ -24,8 +32,6 @@ function findNextTradingNav(history, targetDate) {
   return match;
 }
 
-// For future (projected) dates we have no real trading calendar, so we
-// only approximate by pushing weekends to the following Monday.
 function shiftPastWeekend(date) {
   const d = new Date(date);
   const day = d.getDay();
@@ -107,6 +113,43 @@ function calculateForFund(fund, years, startDate, todayStr, stepUpPercent) {
   };
 }
 
+// NAV for an arbitrary withdrawal date: real historical NAV if on/before
+// today, otherwise a continuous compound projection from the latest NAV.
+function getNavAtDate(fundDetail, targetDate, todayDate, annualRatePct) {
+  if (targetDate <= todayDate) {
+    const hist = findNextTradingNav(fundDetail.history, targetDate);
+    return hist ? hist.nav : fundDetail.latestNav;
+  }
+  const daysAhead = (targetDate - todayDate) / 86400000;
+  return fundDetail.latestNav * Math.pow(1 + annualRatePct / 100, daysAhead / 365.25);
+}
+
+// FIFO lot-wise LTCG/STCG split for a single lump-sum withdrawal.
+function calculateWithdrawal(fund, installments, withdrawalDateStr, todayStr, annualRatePct) {
+  const withdrawalDate = new Date(withdrawalDateStr);
+  const today = new Date(todayStr);
+  const nav = getNavAtDate(fund.detail, withdrawalDate, today, annualRatePct);
+
+  let totalInvested = 0, stcgGain = 0, ltcgGain = 0, totalUnits = 0;
+  installments.forEach(inst => {
+    const purchaseDate = new Date(inst.date);
+    const units = inst.invested / inst.nav;
+    totalUnits += units;
+    totalInvested += inst.invested;
+    const gain = units * nav - inst.invested;
+    const holdingDays = (withdrawalDate - purchaseDate) / 86400000;
+    if (holdingDays >= 365) ltcgGain += gain; else stcgGain += gain;
+  });
+
+  const currentValue = totalUnits * nav;
+  const taxableLTCG = Math.max(0, ltcgGain - LTCG_EXEMPTION);
+  const ltcgTax = taxableLTCG * LTCG_RATE;
+  const stcgTax = Math.max(0, stcgGain) * STCG_RATE;
+  const totalTax = ltcgTax + stcgTax;
+
+  return { nav, totalInvested, currentValue, stcgGain, ltcgGain, ltcgTax, stcgTax, totalTax, netAmount: currentValue - totalTax };
+}
+
 export default function Home() {
   const [allFunds, setAllFunds] = useState([]);
   const todayStr = useMemo(() => new Date().toISOString().split('T')[0], []);
@@ -174,8 +217,7 @@ export default function Home() {
   }
 
   function handleYearsChange(value) {
-    const n = Math.round(Number(value));
-    if (isNaN(n)) { setYears(''); return; }
+    const n = Math.round(toNum(value, 1));
     setYears(Math.min(MAX_YEARS, Math.max(1, n)));
   }
 
@@ -221,7 +263,7 @@ export default function Home() {
     const perFund = portfolioFunds.map(f => {
       const stepUp = applySameStepUp ? globalStepUp : (f.stepUp || 0);
       const res = calculateForFund(f, years, startDate, todayStr, stepUp);
-      return { fundLabel: `${f.detail.schemeName} — ${f.selected.plan} ${f.selected.option}`, ...res };
+      return { fund: f, fundLabel: `${f.detail.schemeName} — ${f.selected.plan} ${f.selected.option}`, ...res };
     });
 
     const combinedTotalInvested = perFund.reduce((s, r) => s + r.totalInvested, 0);
@@ -268,10 +310,20 @@ export default function Home() {
         <h1 className="text-2xl font-bold text-slate-800 mb-1">SIP Calculator</h1>
         <p className="text-slate-500 mb-6">Plan a multi-fund SIP portfolio with real fund data.</p>
 
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-6 text-sm">
+          <h2 className="font-semibold text-slate-800 mb-2">Capital Gains Tax on Equity Funds (FY 2026-27)</h2>
+          <ul className="list-disc list-inside space-y-1 text-slate-600">
+            <li><strong>Held over 12 months (LTCG):</strong> 12.5% tax on gains above ₹1.25 lakh in a financial year (this exemption is shared across all your equity fund gains that year, not per fund).</li>
+            <li><strong>Held under 12 months (STCG):</strong> flat 20% tax, no exemption.</li>
+            <li>Debt funds (bought after Apr 2023) are always taxed at your income slab rate — not covered by this calculator yet.</li>
+          </ul>
+        </div>
+
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Number of Years (1–{MAX_YEARS})</label>
-            <input type="number" min="1" max={MAX_YEARS} step="1" className="w-full border border-slate-300 rounded-lg px-3 py-2"
+            <input type="number" min="1" max={MAX_YEARS} step="1" onFocus={e => e.target.select()}
+              className="w-full border border-slate-300 rounded-lg px-3 py-2"
               value={years} onChange={e => handleYearsChange(e.target.value)} />
           </div>
           <div>
@@ -286,9 +338,9 @@ export default function Home() {
               Same step-up % for all funds
             </label>
             {applySameStepUp && (
-              <input type="number" min="0" max={MAX_STEP_UP} step="0.5"
+              <input type="number" min="0" max={MAX_STEP_UP} step="0.5" onFocus={e => e.target.select()}
                 className="w-full border border-slate-300 rounded-lg px-3 py-2 mt-1"
-                value={globalStepUp} onChange={e => setGlobalStepUp(Math.min(MAX_STEP_UP, Math.max(0, Number(e.target.value))))} />
+                value={globalStepUp} onChange={e => setGlobalStepUp(Math.min(MAX_STEP_UP, Math.max(0, toNum(e.target.value))))} />
             )}
           </div>
         </div>
@@ -343,8 +395,9 @@ export default function Home() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Amount (₹, max 1 crore)</label>
-                  <input type="number" min="100" max={MAX_AMOUNT} step="100" className="w-full border border-slate-300 rounded-lg px-3 py-2"
-                    value={f.amount} onChange={e => updateFund(f.id, { amount: Math.min(MAX_AMOUNT, Math.max(0, Number(e.target.value))) })} />
+                  <input type="number" min="100" max={MAX_AMOUNT} step="100" onFocus={e => e.target.select()}
+                    className="w-full border border-slate-300 rounded-lg px-3 py-2"
+                    value={f.amount} onChange={e => updateFund(f.id, { amount: Math.min(MAX_AMOUNT, Math.max(0, toNum(e.target.value))) })} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Frequency</label>
@@ -356,15 +409,16 @@ export default function Home() {
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Expected Annual Return (%, max {MAX_RETURN_PCT})</label>
-                  <input type="number" min="0" max={MAX_RETURN_PCT} step="0.01" className="w-full border border-slate-300 rounded-lg px-3 py-2"
-                    value={f.expectedReturn} onChange={e => updateFund(f.id, { expectedReturn: String(clampReturn(Number(e.target.value))) })} />
+                  <input type="number" min="0" max={MAX_RETURN_PCT} step="0.01" onFocus={e => e.target.select()}
+                    className="w-full border border-slate-300 rounded-lg px-3 py-2"
+                    value={f.expectedReturn} onChange={e => updateFund(f.id, { expectedReturn: String(clampReturn(toNum(e.target.value))) })} />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-slate-700 mb-1">Step-up % per year (max {MAX_STEP_UP})</label>
-                  <input type="number" min="0" max={MAX_STEP_UP} step="0.5" disabled={applySameStepUp}
+                  <input type="number" min="0" max={MAX_STEP_UP} step="0.5" disabled={applySameStepUp} onFocus={e => e.target.select()}
                     className="w-full border border-slate-300 rounded-lg px-3 py-2 disabled:bg-slate-100 disabled:text-slate-400"
                     value={applySameStepUp ? globalStepUp : f.stepUp}
-                    onChange={e => updateFund(f.id, { stepUp: Math.min(MAX_STEP_UP, Math.max(0, Number(e.target.value))) })} />
+                    onChange={e => updateFund(f.id, { stepUp: Math.min(MAX_STEP_UP, Math.max(0, toNum(e.target.value))) })} />
                   {applySameStepUp && <p className="text-xs text-slate-400 mt-1">Using the global step-up % above.</p>}
                 </div>
               </div>
@@ -448,12 +502,66 @@ export default function Home() {
                     </tbody>
                   </table>
                 </details>
+
+                <WithdrawalPlanner fund={r.fund} installments={r.installments} todayStr={todayStr} />
               </div>
             ))}
           </div>
         )}
       </div>
     </main>
+  );
+}
+
+function WithdrawalPlanner({ fund, installments, todayStr }) {
+  const lastDate = installments[installments.length - 1]?.date || todayStr;
+
+  const allLtcgDate = useMemo(() => {
+    let maxDate = new Date(installments[0]?.date || todayStr);
+    installments.forEach(inst => {
+      const d = new Date(inst.date);
+      d.setDate(d.getDate() + 365);
+      if (d > maxDate) maxDate = d;
+    });
+    return maxDate.toISOString().split('T')[0];
+  }, [installments, todayStr]);
+
+  const [withdrawalDate, setWithdrawalDate] = useState(lastDate);
+  const rate = parseFloat(fund.expectedReturn) || 0;
+
+  const w = useMemo(
+    () => calculateWithdrawal(fund, installments, withdrawalDate, todayStr, rate),
+    [fund, installments, withdrawalDate, todayStr, rate]
+  );
+
+  return (
+    <div className="mt-4 border-t border-slate-200 pt-4">
+      <h3 className="font-semibold text-slate-700 mb-2">Withdrawal Planner (lump sum)</h3>
+      <div className="flex flex-wrap gap-3 items-end mb-3">
+        <div>
+          <label className="block text-xs text-slate-500 mb-1">Withdrawal Date</label>
+          <input type="date" min={MIN_START_DATE} value={withdrawalDate}
+            onChange={e => setWithdrawalDate(e.target.value)}
+            className="border border-slate-300 rounded-lg px-3 py-1.5 text-sm" />
+        </div>
+        <button onClick={() => setWithdrawalDate(lastDate)}
+          className="text-xs text-indigo-600 hover:underline">Withdraw right after SIP ends</button>
+        <button onClick={() => setWithdrawalDate(allLtcgDate)}
+          className="text-xs text-indigo-600 hover:underline">Hold until fully LTCG ({allLtcgDate})</button>
+      </div>
+      <table className="w-full text-sm">
+        <tbody>
+          <tr><td className="py-1 pr-4 text-slate-500">Invested</td><td className="py-1">₹{Math.round(w.totalInvested).toLocaleString('en-IN')}</td></tr>
+          <tr><td className="py-1 pr-4 text-slate-500">Current Value at Withdrawal</td><td className="py-1">₹{Math.round(w.currentValue).toLocaleString('en-IN')}</td></tr>
+          <tr><td className="py-1 pr-4 text-slate-500">Short-term Gain (STCG)</td><td className="py-1">₹{Math.round(w.stcgGain).toLocaleString('en-IN')}</td></tr>
+          <tr><td className="py-1 pr-4 text-slate-500">Long-term Gain (LTCG)</td><td className="py-1">₹{Math.round(w.ltcgGain).toLocaleString('en-IN')}</td></tr>
+          <tr><td className="py-1 pr-4 text-slate-500">STCG Tax (20%)</td><td className="py-1 text-red-600">₹{Math.round(w.stcgTax).toLocaleString('en-IN')}</td></tr>
+          <tr><td className="py-1 pr-4 text-slate-500">LTCG Tax (12.5% above ₹1.25L)</td><td className="py-1 text-red-600">₹{Math.round(w.ltcgTax).toLocaleString('en-IN')}</td></tr>
+          <tr className="font-semibold border-t border-slate-200"><td className="py-1 pr-4">Net Amount After Tax</td><td className="py-1">₹{Math.round(w.netAmount).toLocaleString('en-IN')}</td></tr>
+        </tbody>
+      </table>
+      <p className="text-xs text-slate-400 mt-2">Each SIP installment is treated as a separate purchase lot (as tax rules require) — some lots may be LTCG and others STCG depending on how long each has been held. Assumes this is the only equity LTCG you realize that financial year.</p>
+    </div>
   );
 }
 
