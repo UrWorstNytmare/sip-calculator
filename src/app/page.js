@@ -7,6 +7,7 @@ const MAX_AMOUNT = 10000000;
 const MAX_RETURN_PCT = 100;
 const MAX_YEARS = 80;
 const MAX_STEP_UP = 50;
+const MAX_SWP_YEARS = 40;
 const LTCG_EXEMPTION = 125000;
 const LTCG_RATE = 0.125;
 const STCG_RATE = 0.20;
@@ -113,8 +114,8 @@ function calculateForFund(fund, years, startDate, todayStr, stepUpPercent) {
   };
 }
 
-// NAV for an arbitrary withdrawal date: real historical NAV if on/before
-// today, otherwise a continuous compound projection from the latest NAV.
+// NAV for an arbitrary date: real historical NAV if on/before today,
+// otherwise a continuous compound projection from the latest NAV.
 function getNavAtDate(fundDetail, targetDate, todayDate, annualRatePct) {
   if (targetDate <= todayDate) {
     const hist = findNextTradingNav(fundDetail.history, targetDate);
@@ -148,6 +149,98 @@ function calculateWithdrawal(fund, installments, withdrawalDateStr, todayStr, an
   const totalTax = ltcgTax + stcgTax;
 
   return { nav, totalInvested, currentValue, stcgGain, ltcgGain, ltcgTax, stcgTax, totalTax, netAmount: currentValue - totalTax };
+}
+
+function getFinancialYear(date) {
+  const y = date.getFullYear();
+  const m = date.getMonth(); // April = 3
+  return m >= 3 ? `${y}-${y + 1}` : `${y - 1}-${y}`;
+}
+
+// Simulates periodic withdrawals, redeeming units FIFO from the original SIP
+// lots, tracking the ₹1.25L LTCG exemption per financial year as it's used up.
+function calculateSWP(fund, installments, { startDate, frequency, withdrawalAmount, periods }, todayStr) {
+  const today = new Date(todayStr);
+  const rate = parseFloat(fund.expectedReturn) || 0;
+
+  const lots = installments.map(inst => ({
+    date: new Date(inst.date),
+    navAtPurchase: inst.nav,
+    remainingUnits: inst.invested / inst.nav
+  }));
+
+  const exemptionUsed = {};
+  const rows = [];
+  let cumulativeWithdrawn = 0;
+  let cumulativeTax = 0;
+  let exhausted = false;
+  let exhaustedDate = null;
+
+  for (let i = 0; i < periods && !exhausted; i++) {
+    const rawDate = new Date(startDate);
+    if (frequency === 'monthly') rawDate.setMonth(rawDate.getMonth() + i);
+    else rawDate.setFullYear(rawDate.getFullYear() + i);
+    const withdrawalDate = rawDate <= today ? rawDate : shiftPastWeekend(rawDate);
+
+    const nav = getNavAtDate(fund.detail, withdrawalDate, today, rate);
+    const remainingTotalUnits = lots.reduce((s, l) => s + l.remainingUnits, 0);
+    if (remainingTotalUnits <= 0.0001) break;
+
+    let unitsNeeded = withdrawalAmount / nav;
+    let actuallyWithdrawn = withdrawalAmount;
+    if (unitsNeeded >= remainingTotalUnits) {
+      unitsNeeded = remainingTotalUnits;
+      actuallyWithdrawn = unitsNeeded * nav;
+      exhausted = true;
+      exhaustedDate = withdrawalDate.toISOString().split('T')[0];
+    }
+
+    let stillNeeded = unitsNeeded;
+    let periodSTCGGain = 0, periodLTCGGain = 0;
+
+    for (const lot of lots) {
+      if (stillNeeded <= 0) break;
+      if (lot.remainingUnits <= 0) continue;
+      const take = Math.min(lot.remainingUnits, stillNeeded);
+      const gain = take * nav - take * lot.navAtPurchase;
+      const holdingDays = (withdrawalDate - lot.date) / 86400000;
+      if (holdingDays >= 365) periodLTCGGain += gain; else periodSTCGGain += gain;
+      lot.remainingUnits -= take;
+      stillNeeded -= take;
+    }
+
+    const fy = getFinancialYear(withdrawalDate);
+    const usedSoFar = exemptionUsed[fy] || 0;
+    const remainingExemption = Math.max(0, LTCG_EXEMPTION - usedSoFar);
+    const positiveLTCG = Math.max(0, periodLTCGGain);
+    const taxableLTCG = Math.max(0, positiveLTCG - remainingExemption);
+    exemptionUsed[fy] = usedSoFar + Math.min(positiveLTCG, remainingExemption);
+
+    const ltcgTax = taxableLTCG * LTCG_RATE;
+    const stcgTax = Math.max(0, periodSTCGGain) * STCG_RATE;
+    const periodTax = ltcgTax + stcgTax;
+
+    cumulativeWithdrawn += actuallyWithdrawn;
+    cumulativeTax += periodTax;
+
+    const remainingUnitsNow = lots.reduce((s, l) => s + l.remainingUnits, 0);
+    const remainingInvested = lots.reduce((s, l) => s + l.remainingUnits * l.navAtPurchase, 0);
+    const remainingValue = remainingUnitsNow * nav;
+
+    rows.push({
+      date: withdrawalDate.toISOString().split('T')[0],
+      nav,
+      withdrawn: actuallyWithdrawn,
+      gain: periodSTCGGain + periodLTCGGain,
+      tax: periodTax,
+      netAfterTax: actuallyWithdrawn - periodTax,
+      remainingInvested,
+      remainingValue,
+      percentGain: remainingInvested > 0 ? ((remainingValue - remainingInvested) / remainingInvested) * 100 : 0
+    });
+  }
+
+  return { rows, cumulativeWithdrawn, cumulativeTax, corpusExhausted: exhausted, exhaustedDate };
 }
 
 export default function Home() {
@@ -504,6 +597,7 @@ export default function Home() {
                 </details>
 
                 <WithdrawalPlanner fund={r.fund} installments={r.installments} todayStr={todayStr} />
+                <SWPPlanner fund={r.fund} installments={r.installments} todayStr={todayStr} />
               </div>
             ))}
           </div>
@@ -560,7 +654,103 @@ function WithdrawalPlanner({ fund, installments, todayStr }) {
           <tr className="font-semibold border-t border-slate-200"><td className="py-1 pr-4">Net Amount After Tax</td><td className="py-1">₹{Math.round(w.netAmount).toLocaleString('en-IN')}</td></tr>
         </tbody>
       </table>
-      <p className="text-xs text-slate-400 mt-2">Each SIP installment is treated as a separate purchase lot (as tax rules require) — some lots may be LTCG and others STCG depending on how long each has been held. Assumes this is the only equity LTCG you realize that financial year.</p>
+      <p className="text-xs text-slate-400 mt-2">Each SIP installment is treated as a separate purchase lot (as tax rules require). Assumes this is the only equity LTCG you realize that financial year.</p>
+    </div>
+  );
+}
+
+function SWPPlanner({ fund, installments, todayStr }) {
+  const defaultStart = installments[installments.length - 1]?.date || todayStr;
+  const [frequency, setFrequency] = useState('monthly');
+  const [amount, setAmount] = useState(5000);
+  const [startDate, setStartDate] = useState(defaultStart);
+  const [swpYears, setSwpYears] = useState(10);
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState('');
+
+  function runSWP() {
+    setError('');
+    if (!amount || amount <= 0 || amount > MAX_AMOUNT) { setError('Enter a valid withdrawal amount.'); return; }
+    if (!swpYears || swpYears < 1 || swpYears > MAX_SWP_YEARS) { setError(`Enter years between 1 and ${MAX_SWP_YEARS}.`); return; }
+    const periods = frequency === 'monthly' ? swpYears * 12 : swpYears;
+    const res = calculateSWP(fund, installments, { startDate, frequency, withdrawalAmount: amount, periods }, todayStr);
+    setResult(res);
+  }
+
+  return (
+    <div className="mt-4 border-t border-slate-200 pt-4">
+      <h3 className="font-semibold text-slate-700 mb-2">SWP Planner (staggered withdrawal)</h3>
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-3">
+        <div>
+          <label className="block text-xs text-slate-500 mb-1">Frequency</label>
+          <select className="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-sm" value={frequency} onChange={e => setFrequency(e.target.value)}>
+            <option value="monthly">Monthly</option>
+            <option value="yearly">Annually</option>
+          </select>
+        </div>
+        <div>
+          <label className="block text-xs text-slate-500 mb-1">Withdrawal Amount (₹)</label>
+          <input type="number" min="100" max={MAX_AMOUNT} onFocus={e => e.target.select()}
+            className="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-sm"
+            value={amount} onChange={e => setAmount(Math.min(MAX_AMOUNT, Math.max(0, toNum(e.target.value))))} />
+        </div>
+        <div>
+          <label className="block text-xs text-slate-500 mb-1">Start Date</label>
+          <input type="date" className="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-sm"
+            value={startDate} onChange={e => setStartDate(e.target.value)} />
+        </div>
+        <div>
+          <label className="block text-xs text-slate-500 mb-1">For How Many Years (max {MAX_SWP_YEARS})</label>
+          <input type="number" min="1" max={MAX_SWP_YEARS} onFocus={e => e.target.select()}
+            className="w-full border border-slate-300 rounded-lg px-2 py-1.5 text-sm"
+            value={swpYears} onChange={e => setSwpYears(Math.min(MAX_SWP_YEARS, Math.max(1, Math.round(toNum(e.target.value, 1)))))} />
+        </div>
+      </div>
+      <button onClick={runSWP} className="bg-indigo-600 text-white px-4 py-1.5 rounded-lg text-sm font-medium hover:bg-indigo-700 mb-3">
+        Calculate SWP
+      </button>
+      {error && <p className="text-red-600 text-sm mb-2">{error}</p>}
+
+      {result && (
+        <>
+          <p className="text-sm mb-2">
+            Total Withdrawn: ₹{Math.round(result.cumulativeWithdrawn).toLocaleString('en-IN')} · Total Tax: ₹{Math.round(result.cumulativeTax).toLocaleString('en-IN')}
+            {result.corpusExhausted && <span className="text-amber-600"> · Corpus fully exhausted on {result.exhaustedDate}</span>}
+          </p>
+          <details>
+            <summary className="cursor-pointer text-sm text-indigo-600">Show period-wise detail ({result.rows.length} withdrawals)</summary>
+            <table className="w-full text-sm mt-2">
+              <thead>
+                <tr className="text-left border-b border-slate-200">
+                  <th className="py-1 pr-3">Date</th>
+                  <th className="py-1 pr-3">NAV (₹)</th>
+                  <th className="py-1 pr-3">Withdrawn (₹)</th>
+                  <th className="py-1 pr-3">Tax (₹)</th>
+                  <th className="py-1 pr-3">Net (₹)</th>
+                  <th className="py-1 pr-3">Remaining Invested (₹)</th>
+                  <th className="py-1 pr-3">Remaining Value (₹)</th>
+                  <th className="py-1">Gain %</th>
+                </tr>
+              </thead>
+              <tbody>
+                {result.rows.map((row, i) => (
+                  <tr key={i} className="border-b border-slate-100">
+                    <td className="py-1 pr-3">{row.date}</td>
+                    <td className="py-1 pr-3">{row.nav.toFixed(2)}</td>
+                    <td className="py-1 pr-3">{Math.round(row.withdrawn).toLocaleString('en-IN')}</td>
+                    <td className="py-1 pr-3 text-red-600">{Math.round(row.tax).toLocaleString('en-IN')}</td>
+                    <td className="py-1 pr-3">{Math.round(row.netAfterTax).toLocaleString('en-IN')}</td>
+                    <td className="py-1 pr-3">{Math.round(row.remainingInvested).toLocaleString('en-IN')}</td>
+                    <td className="py-1 pr-3">{Math.round(row.remainingValue).toLocaleString('en-IN')}</td>
+                    <td className="py-1">{row.percentGain.toFixed(1)}%</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </details>
+        </>
+      )}
+      <p className="text-xs text-slate-400 mt-2">Redeems units oldest-first (FIFO) and tracks the ₹1.25L LTCG exemption per financial year as it's used up across withdrawals.</p>
     </div>
   );
 }
