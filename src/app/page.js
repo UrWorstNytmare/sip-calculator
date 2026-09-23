@@ -400,7 +400,8 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-slate-50 px-4 py-8">
       <div className="mx-auto max-w-4xl">
-        <h1 className="text-2xl font-bold text-slate-800 mb-1">SIP Calculator</h1>
+        <a href="/explore" className="text-sm text-indigo-600 hover:underline">Browse All Funds &rarr;</a>
+        <h1 className="text-2xl font-bold text-slate-800 mt-2 mb-1">SIP Calculator</h1>
         <p className="text-slate-500 mb-6">Plan a multi-fund SIP portfolio with real fund data.</p>
 
         <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-5 mb-6 text-sm">
