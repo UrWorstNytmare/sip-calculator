@@ -24,9 +24,11 @@ jobs:
       - run: pip install amfipy
       - run: python scripts/fetch_ratios.py
 
+      - run: node scripts/matchRatios.js
+
       - run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/funds.json data/amc_list.json data/ter_raw.json
+          git add data/funds.json data/amc_list.json data/ter_raw.json data/expense_ratio.json data/unmatched_names.json
           git commit -m "Auto-update fund list + ratios" || echo "No changes"
           git push
