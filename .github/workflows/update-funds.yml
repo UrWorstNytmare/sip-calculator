@@ -17,9 +17,16 @@ jobs:
         with:
           node-version: 20
       - run: node scripts/fetchFunds.js
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install amfipy
+      - run: python scripts/fetch_ratios.py
+
       - run: |
           git config user.name "github-actions"
           git config user.email "actions@github.com"
-          git add data/funds.json
-          git commit -m "Auto-update fund list" || echo "No changes"
+          git add data/funds.json data/amc_list.json data/ter_raw.json
+          git commit -m "Auto-update fund list + ratios" || echo "No changes"
           git push
