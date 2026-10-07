@@ -83,6 +83,50 @@
     "expenseRatio": 1.68,
     "terMonth": "10-2026"
   },
+  "100780": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "100781": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "100782": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "100783": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "100784": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "100785": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
+  "100786": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
+  "100787": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
+  "100788": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
+  "100789": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
+  "100793": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
   "100948": {
     "expenseRatio": 1.39,
     "terMonth": "10-2026"
@@ -155,6 +199,10 @@
     "expenseRatio": 1.83,
     "terMonth": "10-2026"
   },
+  "102142": {
+    "expenseRatio": 2.57,
+    "terMonth": "10-2026"
+  },
   "102401": {
     "expenseRatio": 2.37,
     "terMonth": "10-2026"
@@ -195,12 +243,24 @@
     "expenseRatio": 1.99,
     "terMonth": "10-2026"
   },
+  "103154": {
+    "expenseRatio": 1.9,
+    "terMonth": "10-2026"
+  },
+  "103155": {
+    "expenseRatio": 1.9,
+    "terMonth": "10-2026"
+  },
   "103678": {
     "expenseRatio": 2.21,
     "terMonth": "10-2026"
   },
   "103679": {
     "expenseRatio": 2.21,
+    "terMonth": "10-2026"
+  },
+  "103743": {
+    "expenseRatio": 2.57,
     "terMonth": "10-2026"
   },
   "103780": {
@@ -268,11 +328,11 @@
     "terMonth": "10-2026"
   },
   "106978": {
-    "expenseRatio": 2.47,
+    "expenseRatio": 2.46,
     "terMonth": "10-2026"
   },
   "106979": {
-    "expenseRatio": 2.47,
+    "expenseRatio": 2.46,
     "terMonth": "10-2026"
   },
   "108402": {
@@ -419,6 +479,22 @@
     "expenseRatio": 1.89,
     "terMonth": "10-2026"
   },
+  "112867": {
+    "expenseRatio": 1.9,
+    "terMonth": "10-2026"
+  },
+  "112868": {
+    "expenseRatio": 1.9,
+    "terMonth": "10-2026"
+  },
+  "112869": {
+    "expenseRatio": 1.9,
+    "terMonth": "10-2026"
+  },
+  "112870": {
+    "expenseRatio": 1.9,
+    "terMonth": "10-2026"
+  },
   "112924": {
     "expenseRatio": 2.18,
     "terMonth": "10-2026"
@@ -445,6 +521,10 @@
   },
   "113134": {
     "expenseRatio": 2.12,
+    "terMonth": "10-2026"
+  },
+  "113373": {
+    "expenseRatio": 2.57,
     "terMonth": "10-2026"
   },
   "117312": {
@@ -537,6 +617,10 @@
   },
   "118311": {
     "expenseRatio": 0.77,
+    "terMonth": "10-2026"
+  },
+  "118326": {
+    "expenseRatio": 0.42,
     "terMonth": "10-2026"
   },
   "118387": {
@@ -767,6 +851,14 @@
     "expenseRatio": 1.47,
     "terMonth": "10-2026"
   },
+  "119594": {
+    "expenseRatio": 1.71,
+    "terMonth": "10-2026"
+  },
+  "119595": {
+    "expenseRatio": 1.71,
+    "terMonth": "10-2026"
+  },
   "119601": {
     "expenseRatio": 1.37,
     "terMonth": "10-2026"
@@ -781,6 +873,62 @@
   },
   "119609": {
     "expenseRatio": 0.76,
+    "terMonth": "10-2026"
+  },
+  "119621": {
+    "expenseRatio": 0.33,
+    "terMonth": "10-2026"
+  },
+  "119622": {
+    "expenseRatio": 0.33,
+    "terMonth": "10-2026"
+  },
+  "119624": {
+    "expenseRatio": 0.33,
+    "terMonth": "10-2026"
+  },
+  "119625": {
+    "expenseRatio": 0.27,
+    "terMonth": "10-2026"
+  },
+  "119626": {
+    "expenseRatio": 0.27,
+    "terMonth": "10-2026"
+  },
+  "119627": {
+    "expenseRatio": 0.27,
+    "terMonth": "10-2026"
+  },
+  "119628": {
+    "expenseRatio": 0.33,
+    "terMonth": "10-2026"
+  },
+  "119629": {
+    "expenseRatio": 0.27,
+    "terMonth": "10-2026"
+  },
+  "119630": {
+    "expenseRatio": 0.33,
+    "terMonth": "10-2026"
+  },
+  "119631": {
+    "expenseRatio": 0.33,
+    "terMonth": "10-2026"
+  },
+  "119635": {
+    "expenseRatio": 1.14,
+    "terMonth": "10-2026"
+  },
+  "119636": {
+    "expenseRatio": 1.14,
+    "terMonth": "10-2026"
+  },
+  "119637": {
+    "expenseRatio": 1.14,
+    "terMonth": "10-2026"
+  },
+  "119638": {
+    "expenseRatio": 1.14,
     "terMonth": "10-2026"
   },
   "120136": {
@@ -853,6 +1001,14 @@
   },
   "120484": {
     "expenseRatio": 1.16,
+    "terMonth": "10-2026"
+  },
+  "120517": {
+    "expenseRatio": 1.17,
+    "terMonth": "10-2026"
+  },
+  "120518": {
+    "expenseRatio": 1.17,
     "terMonth": "10-2026"
   },
   "120662": {
@@ -1211,6 +1367,22 @@
     "expenseRatio": 0.54,
     "terMonth": "10-2026"
   },
+  "132174": {
+    "expenseRatio": 1.12,
+    "terMonth": "10-2026"
+  },
+  "132175": {
+    "expenseRatio": 1.12,
+    "terMonth": "10-2026"
+  },
+  "132185": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
+  "132189": {
+    "expenseRatio": 0.56,
+    "terMonth": "10-2026"
+  },
   "133344": {
     "expenseRatio": 1.43,
     "terMonth": "10-2026"
@@ -1313,6 +1485,46 @@
   },
   "133868": {
     "expenseRatio": 0.61,
+    "terMonth": "10-2026"
+  },
+  "134355": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134356": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134358": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134359": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134360": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134361": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134362": {
+    "expenseRatio": 0.42,
+    "terMonth": "10-2026"
+  },
+  "134363": {
+    "expenseRatio": 0.27,
+    "terMonth": "10-2026"
+  },
+  "134369": {
+    "expenseRatio": 0.27,
+    "terMonth": "10-2026"
+  },
+  "134370": {
+    "expenseRatio": 0.27,
     "terMonth": "10-2026"
   },
   "134493": {
@@ -1428,11 +1640,11 @@
     "terMonth": "10-2026"
   },
   "139528": {
-    "expenseRatio": 2.25,
+    "expenseRatio": 2.24,
     "terMonth": "10-2026"
   },
   "139529": {
-    "expenseRatio": 2.25,
+    "expenseRatio": 2.24,
     "terMonth": "10-2026"
   },
   "139530": {
@@ -2055,6 +2267,86 @@
     "expenseRatio": 0.04,
     "terMonth": "10-2026"
   },
+  "149549": {
+    "expenseRatio": 0.98,
+    "terMonth": "10-2026"
+  },
+  "149550": {
+    "expenseRatio": 0.98,
+    "terMonth": "10-2026"
+  },
+  "149551": {
+    "expenseRatio": 1.7,
+    "terMonth": "10-2026"
+  },
+  "149552": {
+    "expenseRatio": 1.7,
+    "terMonth": "10-2026"
+  },
+  "149569": {
+    "expenseRatio": 2.3,
+    "terMonth": "10-2026"
+  },
+  "149570": {
+    "expenseRatio": 1.78,
+    "terMonth": "10-2026"
+  },
+  "149571": {
+    "expenseRatio": 1.78,
+    "terMonth": "10-2026"
+  },
+  "149572": {
+    "expenseRatio": 2.3,
+    "terMonth": "10-2026"
+  },
+  "149599": {
+    "expenseRatio": 2.13,
+    "terMonth": "10-2026"
+  },
+  "149600": {
+    "expenseRatio": 2.13,
+    "terMonth": "10-2026"
+  },
+  "149601": {
+    "expenseRatio": 1.14,
+    "terMonth": "10-2026"
+  },
+  "149602": {
+    "expenseRatio": 1.14,
+    "terMonth": "10-2026"
+  },
+  "149697": {
+    "expenseRatio": 2.43,
+    "terMonth": "10-2026"
+  },
+  "149698": {
+    "expenseRatio": 2.43,
+    "terMonth": "10-2026"
+  },
+  "149699": {
+    "expenseRatio": 1.28,
+    "terMonth": "10-2026"
+  },
+  "149700": {
+    "expenseRatio": 1.28,
+    "terMonth": "10-2026"
+  },
+  "149715": {
+    "expenseRatio": 2.52,
+    "terMonth": "10-2026"
+  },
+  "149716": {
+    "expenseRatio": 2.52,
+    "terMonth": "10-2026"
+  },
+  "149717": {
+    "expenseRatio": 1.11,
+    "terMonth": "10-2026"
+  },
+  "149718": {
+    "expenseRatio": 1.11,
+    "terMonth": "10-2026"
+  },
   "149960": {
     "expenseRatio": 0.69,
     "terMonth": "10-2026"
@@ -2407,6 +2699,30 @@
     "expenseRatio": 0.21,
     "terMonth": "10-2026"
   },
+  "152673": {
+    "expenseRatio": 1.1,
+    "terMonth": "10-2026"
+  },
+  "152674": {
+    "expenseRatio": 2.55,
+    "terMonth": "10-2026"
+  },
+  "152675": {
+    "expenseRatio": 2.55,
+    "terMonth": "10-2026"
+  },
+  "152676": {
+    "expenseRatio": 1.1,
+    "terMonth": "10-2026"
+  },
+  "152677": {
+    "expenseRatio": 1.1,
+    "terMonth": "10-2026"
+  },
+  "152678": {
+    "expenseRatio": 2.55,
+    "terMonth": "10-2026"
+  },
   "152688": {
     "expenseRatio": 1.03,
     "terMonth": "10-2026"
@@ -2500,19 +2816,19 @@
     "terMonth": "10-2026"
   },
   "153364": {
-    "expenseRatio": 3.06,
+    "expenseRatio": 3.05,
     "terMonth": "10-2026"
   },
   "153365": {
-    "expenseRatio": 3.17,
+    "expenseRatio": 3.16,
     "terMonth": "10-2026"
   },
   "153366": {
-    "expenseRatio": 3.17,
+    "expenseRatio": 3.16,
     "terMonth": "10-2026"
   },
   "153367": {
-    "expenseRatio": 3.06,
+    "expenseRatio": 3.05,
     "terMonth": "10-2026"
   },
   "153426": {
