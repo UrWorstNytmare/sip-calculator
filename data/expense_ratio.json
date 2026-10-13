@@ -352,11 +352,11 @@
     "terMonth": "10-2026"
   },
   "106978": {
-    "expenseRatio": 2.47,
+    "expenseRatio": 2.49,
     "terMonth": "10-2026"
   },
   "106979": {
-    "expenseRatio": 2.47,
+    "expenseRatio": 2.49,
     "terMonth": "10-2026"
   },
   "108402": {
@@ -1757,6 +1757,10 @@
   },
   "139872": {
     "expenseRatio": 1.55,
+    "terMonth": "10-2026"
+  },
+  "140107": {
+    "expenseRatio": 0.08,
     "terMonth": "10-2026"
   },
   "140242": {
