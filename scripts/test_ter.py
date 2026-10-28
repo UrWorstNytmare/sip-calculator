@@ -2,7 +2,7 @@
 import io
 from amfipy import AMFIClient
 
-client = AMFIClient(timeout=120)
+client = AMFIClient()
 MONTH = "10-2026"
 
 # A) Excel download (all AMCs) - does it hold the full list?
