@@ -10,7 +10,7 @@ from amfipy import AMFIClient
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 TER_FILE = os.path.join(OUT_DIR, "ter_raw.json")
-FLAG_FILE = os.path.join(OUT_DIR, "ter_backfill_done.txt")
+FLAG_FILE = os.path.join(OUT_DIR, "ter_backfill_v2.txt")
 client = AMFIClient()
 
 # 1) Full AMC ID list
@@ -35,7 +35,9 @@ if first_run:
     months = []
     for fy in [this_fy, prev_fy]:
         try:
-            months += client.ter.months(year=fy)
+            for mo in client.ter.months(year=fy):
+                # months() returns dicts like {'MonthYear': 'October-2026', 'MonthNumber': '10-2026'}
+                months.append(mo["MonthNumber"] if isinstance(mo, dict) else mo)
         except Exception as e:
             print(f"Could not list months for {fy}: {e}")
     print(f"First run: backfilling {len(months)} months (this may take a while)")
@@ -44,6 +46,7 @@ else:
     print("Incremental run: current month only")
 
 # 4) Pull + keep the newest record per scheme
+ok_calls = 0
 for amc in amc_list:
     for m in months:
         try:
@@ -51,6 +54,7 @@ for amc in amc_list:
         except Exception as e:
             print(f"Skipped {amc['name']} {m}: {e}")
             continue
+        ok_calls += 1
         for rec in records:
             key = rec.get("NSDLSchemeCode")
             if not key:
@@ -60,7 +64,7 @@ for amc in amc_list:
                 latest[key] = rec
         time.sleep(0.2)  # be polite to AMFI's server
 
-if first_run and months:
+if first_run and ok_calls > 0:
     open(FLAG_FILE, "w").write("backfill done\n")
 
 all_ter = list(latest.values())
