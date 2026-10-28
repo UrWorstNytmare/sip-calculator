@@ -10,6 +10,7 @@ from amfipy import AMFIClient
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 TER_FILE = os.path.join(OUT_DIR, "ter_raw.json")
+FLAG_FILE = os.path.join(OUT_DIR, "ter_backfill_done.txt")
 client = AMFIClient()
 
 # 1) Full AMC ID list
@@ -23,7 +24,7 @@ if os.path.exists(TER_FILE):
     for rec in json.load(open(TER_FILE)):
         if rec.get("NSDLSchemeCode"):
             latest[rec["NSDLSchemeCode"]] = rec
-first_run = len(latest) == 0
+first_run = not os.path.exists(FLAG_FILE)  # backfill runs once, then flag file stops it
 
 # 3) Decide which months to pull
 today = date.today()
@@ -58,6 +59,9 @@ for amc in amc_list:
             if not existing or rec["TER_Date"] > existing["TER_Date"]:
                 latest[key] = rec
         time.sleep(0.2)  # be polite to AMFI's server
+
+if first_run and months:
+    open(FLAG_FILE, "w").write("backfill done\n")
 
 all_ter = list(latest.values())
 json.dump(all_ter, open(TER_FILE, "w"), indent=2)
