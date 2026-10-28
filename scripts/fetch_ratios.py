@@ -1,76 +1,63 @@
 # scripts/fetch_ratios.py
-# AMFI only re-publishes a scheme's TER when it CHANGES, not every month.
-# So: first run backfills ~2 years (covers most schemes), every run after
-# that just merges in the current month's new filings on top of the saved file.
+# Uses AMFI's monthly TER Excel (all schemes, one row per scheme per day).
+# Keeps the newest row per scheme and writes data/ter_raw.json.
+# Reads this month + last month so the 1st of a month is never empty.
 
-import json, os, time
+import io, json, os
 from datetime import date
+import openpyxl
 from amfipy import AMFIClient
 
 OUT_DIR = os.path.join(os.path.dirname(__file__), "..", "data")
 os.makedirs(OUT_DIR, exist_ok=True)
 TER_FILE = os.path.join(OUT_DIR, "ter_raw.json")
-FLAG_FILE = os.path.join(OUT_DIR, "ter_backfill_v2.txt")
 client = AMFIClient()
 
-# 1) Full AMC ID list
-amc_list = client.fund_performance.filters()["mutualFundList"]
-json.dump(amc_list, open(os.path.join(OUT_DIR, "amc_list.json"), "w"), indent=2)
-print(f"Saved {len(amc_list)} AMCs")
-
-# 2) Load whatever we already saved before (key = NSDLSchemeCode)
-latest = {}
-if os.path.exists(TER_FILE):
-    for rec in json.load(open(TER_FILE)):
-        if rec.get("NSDLSchemeCode"):
-            latest[rec["NSDLSchemeCode"]] = rec
-first_run = not os.path.exists(FLAG_FILE)  # backfill runs once, then flag file stops it
-
-# 3) Decide which months to pull
 today = date.today()
-this_fy = f"{today.year}-{today.year+1}" if today.month >= 4 else f"{today.year-1}-{today.year}"
+cur = f"{today.month:02d}-{today.year}"
+py, pm = (today.year, today.month - 1) if today.month > 1 else (today.year - 1, 12)
+prev = f"{pm:02d}-{py}"
 
-if first_run:
-    prev_fy = f"{int(this_fy[:4]) - 1}-{this_fy[:4]}"
-    months = []
-    for fy in [this_fy, prev_fy]:
-        try:
-            for mo in client.ter.months(year=fy):
-                # months() returns dicts like {'MonthYear': 'October-2026', 'MonthNumber': '10-2026'}
-                months.append(mo["MonthNumber"] if isinstance(mo, dict) else mo)
-        except Exception as e:
-            print(f"Could not list months for {fy}: {e}")
-    print(f"First run: backfilling {len(months)} months (this may take a while)")
-else:
-    months = [f"{today.month:02d}-{today.year}"]
-    print("Incremental run: current month only")
+latest = {}
+for month in [prev, cur]:
+    try:
+        data = client.ter.download_excel(month=month)
+    except Exception as e:
+        print(f"Skipped {month}: {e}")
+        continue
 
-# 4) Pull + keep the newest record per scheme
-ok_calls = 0
-for amc in amc_list:
-    for m in months:
-        try:
-            records = client.ter.fetch(month=m, mf_id=amc["id"])
-        except Exception as e:
-            print(f"Skipped {amc['name']} {m}: {e}")
+    ws = openpyxl.load_workbook(io.BytesIO(data), read_only=True).worksheets[0]
+    rows = ws.iter_rows(values_only=True)
+    header = [str(h).strip() if h else "" for h in next(rows)]
+    i_code = header.index("NSDL Scheme Code")
+    i_name = header.index("Scheme Name")
+    i_cat = header.index("Scheme Category")
+    i_date = header.index("TER Date")
+    i_reg = header.index("Regular Plan - Total TER (%)")
+    i_dir = header.index("Direct Plan - Total TER (%)")
+
+    count = 0
+    for r in rows:
+        if not r[i_code] or not r[i_date]:
             continue
-        ok_calls += 1
-        for rec in records:
-            key = rec.get("NSDLSchemeCode")
-            if not key:
-                continue
-            existing = latest.get(key)
-            if not existing or rec["TER_Date"] > existing["TER_Date"]:
-                latest[key] = rec
-        time.sleep(0.2)  # be polite to AMFI's server
-
-if first_run and ok_calls > 0:
-    open(FLAG_FILE, "w").write("backfill done\n")
+        d = r[i_date]
+        iso = d.isoformat() if hasattr(d, "isoformat") else str(d)
+        old = latest.get(r[i_code])
+        if not old or iso > old["TER_Date"]:
+            latest[r[i_code]] = {
+                "NSDLSchemeCode": r[i_code],
+                "Scheme_Name": r[i_name],
+                "SchemeCat_Desc": r[i_cat],
+                "TER_Date": iso,
+                "R_TER": r[i_reg],
+                "D_TER": r[i_dir],
+                "Month": month,
+            }
+        count += 1
+    print(f"{month}: read {count} rows")
 
 all_ter = list(latest.values())
 json.dump(all_ter, open(TER_FILE, "w"), indent=2)
-print(f"Saved {len(all_ter)} total schemes with known TER")
-
+print(f"Saved {len(all_ter)} schemes with latest TER")
 if all_ter:
-    print("SAMPLE KEYS:", list(all_ter[0].keys()))
     print("SAMPLE RECORD:", all_ter[0])
