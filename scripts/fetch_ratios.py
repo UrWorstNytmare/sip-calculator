@@ -36,8 +36,10 @@ for month in [prev, cur]:
     i_reg = header.index("Regular Plan - Total TER (%)")
     i_dir = header.index("Direct Plan - Total TER (%)")
 
+    width = max(i_code, i_name, i_cat, i_date, i_reg, i_dir) + 1
     count = 0
     for r in rows:
+        r = list(r) + [None] * (width - len(r))  # pad short/blank rows
         if not r[i_code] or not r[i_date]:
             continue
         d = r[i_date]
