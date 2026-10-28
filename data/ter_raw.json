@@ -3138,5 +3138,25 @@
     "D_TER": "0.0800",
     "MF_ID": 21,
     "Month": "10-2026"
+  },
+  {
+    "NSDLSchemeCode": "PGIM/O/H/AHF/04/01/0006",
+    "Scheme_Name": "PGIM India Aggressive Hybrid Equity Fund",
+    "SchemeType_Desc": "Open Ended",
+    "SchemeCat_Desc": "Hybrid Scheme - Aggressive Hybrid Fund",
+    "TER_Year": "2026-2027",
+    "TER_Date": "2026-10-10T00:00:00.000Z",
+    "R_BER": "2.1000",
+    "R_BrokerageCost": "0.0300",
+    "R_TransactionCost": "0.0000",
+    "R_StatutoryLevies": "0.4200",
+    "R_TER": "2.5500",
+    "D_BER": "0.8500",
+    "D_BrokerageCost": "0.0300",
+    "D_TransactionCost": "0.0000",
+    "D_StatutoryLevies": "0.2000",
+    "D_TER": "1.0800",
+    "MF_ID": 58,
+    "Month": "10-2026"
   }
 ]
