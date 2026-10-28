@@ -695,6 +695,7 @@
   "UTI Nifty 5 yr Benchmark G-Sec ETF",
   "Zerodha Nifty 1D Rate Liquid ETF",
   "Zerodha Nifty 8-13 Yr G-Sec ETF",
+  "360 ONE MSCI India ETF",
   "Aditya Birla Sun Life BSE Sensex ETF",
   "Aditya Birla Sun Life BSE Top 10 Banks ETF",
   "Aditya Birla Sun Life BSE Total Market ETF",
@@ -789,7 +790,6 @@
   "Mirae Asset Gold ETF",
   "Zerodha Gold ETF",
   "Mirae Asset Nifty200 Momentum 30 Plus 8-13 yr G-Sec 50:50 ETF",
-  "360 ONE MSCI India ETF",
   "Groww BSE Hospitals ETF",
   "Groww BSE Power ETF",
   "Groww Nifty 200 ETF",
@@ -3238,5 +3238,6 @@
   "UTI Quarterly Interval Fund - II",
   "UTI Quarterly Interval Fund - III",
   "UTI Fixed Term Income Fund Series XXXVI - I (1574 Days)",
+  "Aditya Birla Sun Life Fixed Maturity Plan-Series VB (136 Days)",
   "UTI Annual Interval Fund - I"
 ]
