@@ -19593,6 +19593,15 @@
     "Month": "10-2026"
   },
   {
+    "NSDLSchemeCode": "SBIM/O/O/EET/26/07/0209",
+    "Scheme_Name": "SBI BSE India Defence ETF",
+    "SchemeCat_Desc": "Exchange Traded Funds (ETFs) - Equity ETF",
+    "TER_Date": "2026-10-27T00:00:00",
+    "R_TER": 0.35,
+    "D_TER": 0,
+    "Month": "10-2026"
+  },
+  {
     "NSDLSchemeCode": "SBIM/O/O/FOD/26/07/0208",
     "Scheme_Name": "SBI Nifty200 Value 30 ETF FOF",
     "SchemeCat_Desc": "Fund of Funds Scheme (Domestic) - Fund of Funds Scheme (Domestic)",
