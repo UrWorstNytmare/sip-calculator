@@ -28,6 +28,7 @@ for (const fund of funds) {
   const rec = terMap.get(normalize(fund.schemeName));
   if (!rec) { unmatched.add(fund.schemeName); continue; }
 
+  if (!fund.plan) continue; // plan unknown -> can't tell Direct vs Regular, so no ratio
   const isDirect = (fund.plan || '').toLowerCase().includes('direct');
   const ter = isDirect ? rec.D_TER : rec.R_TER;
   if (ter == null) continue;
