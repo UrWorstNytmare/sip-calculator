@@ -22,7 +22,15 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        {children}
+        <footer className="mt-auto border-t border-slate-200 bg-white px-4 py-6 text-center text-xs text-slate-500">
+          <p className="mb-2">For education only. Not investment advice. Mutual fund investments are subject to market risks.</p>
+          <a href="/privacy" className="mx-2 hover:underline">Privacy Policy</a>
+          <a href="/terms" className="mx-2 hover:underline">Terms of Use</a>
+          <a href="/disclaimer" className="mx-2 hover:underline">Disclaimer</a>
+        </footer>
+      </body>
     </html>
   );
 }
