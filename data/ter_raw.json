@@ -9858,10 +9858,10 @@
     "NSDLSchemeCode": "JBMF/O/D /LIF/25/06/0001",
     "Scheme_Name": "JioBlackRock Liquid Fund",
     "SchemeCat_Desc": "Income/Debt Oriented Schemes - Liquid Fund",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 0.23,
-    "D_TER": 0.1,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 0.26,
+    "D_TER": 0.13,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "JBMF/O/D /MMF/25/06/0002",
@@ -9930,10 +9930,10 @@
     "NSDLSchemeCode": "JBMF/O/D /ONF/25/06/0003",
     "Scheme_Name": "JioBlackRock Overnight Fund",
     "SchemeCat_Desc": "Income/Debt Oriented Schemes - Overnight Fund",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 0.21,
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 0.2,
     "D_TER": 0.12,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "JBMF/O/E/THE/25/11/0013",
@@ -13575,55 +13575,55 @@
     "NSDLSchemeCode": "NAVI/O/H /BHF/18/03/0008",
     "Scheme_Name": "Navi Aggressive Hybrid Fund",
     "SchemeCat_Desc": "Hybrid Scheme - Aggressive Hybrid Fund",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 2.58,
-    "D_TER": 0.69,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.57,
+    "D_TER": 0.68,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/E/EIN/23/07/0023",
     "Scheme_Name": "Navi BSE Sensex Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.1,
-    "D_TER": 0.5,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.09,
+    "D_TER": 0.49,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/E/ELS/23/02/0020",
     "Scheme_Name": "Navi ELSS Tax Saver Nifty 50 Index Fund",
     "SchemeCat_Desc": "Equity Scheme - ELSS",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.08,
-    "D_TER": 0.25,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.07,
+    "D_TER": 0.24,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/E /FCF/18/05/0009",
     "Scheme_Name": "Navi Flexi Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Flexi Cap Fund",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 2.57,
-    "D_TER": 0.7,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.56,
+    "D_TER": 0.69,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/E /LMF/15/07/0006",
     "Scheme_Name": "Navi Large & Midcap Fund",
     "SchemeCat_Desc": "Equity Scheme - Large & Mid Cap Fund",
-    "TER_Date": "2026-10-31T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 2.53,
     "D_TER": 0.65,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/D /LIF/10/02/0001",
     "Scheme_Name": "Navi Liquid Fund",
     "SchemeCat_Desc": "Debt Scheme - Liquid Fund",
-    "TER_Date": "2026-10-31T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 0.32,
     "D_TER": 0.26,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O /FOO/21/12/0014",
@@ -13638,91 +13638,91 @@
     "NSDLSchemeCode": "NAVI/O/O /EIN/21/06/0010",
     "Scheme_Name": "Navi Nifty 50 Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 0.34,
     "D_TER": 0.1,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O/EIN/24/06/0025",
     "Scheme_Name": "Navi Nifty 500 Multicap 50:25:25 Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 1.14,
     "D_TER": 0.49,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O /EIN/21/12/0015",
     "Scheme_Name": "Navi Nifty Bank Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 1.11,
     "D_TER": 0.23,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O/EIN/22/03/0016",
     "Scheme_Name": "Navi Nifty India Manufacturing Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.17,
-    "D_TER": 0.58,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.16,
+    "D_TER": 0.57,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O/EIN/23/10/0024",
     "Scheme_Name": "Navi Nifty IT Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.21,
-    "D_TER": 0.56,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.2,
+    "D_TER": 0.55,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O /EIN/21/12/0012",
     "Scheme_Name": "Navi Nifty Midcap 150 Index fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.15,
-    "D_TER": 0.38,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.14,
+    "D_TER": 0.37,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O/EIN/25/10/0027",
     "Scheme_Name": "Navi Nifty Midsmallcap 400 Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.4,
-    "D_TER": 0.52,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.42,
+    "D_TER": 0.54,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O /EIN/21/12/0011",
     "Scheme_Name": "Navi Nifty Next 50 Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.17,
-    "D_TER": 0.29,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.16,
+    "D_TER": 0.28,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O/EIN/26/08/0028",
     "Scheme_Name": "Navi Nifty REITs & Realty Index Fund",
     "SchemeCat_Desc": "Index Funds - Equity Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 5.19,
-    "D_TER": 4.31,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.86,
+    "D_TER": 1.98,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O/EIN/24/10/0026",
     "Scheme_Name": "Navi Nifty Smallcap250 Momentum Quality 100 Index Fund",
     "SchemeCat_Desc": "Other Scheme - Index Funds",
-    "TER_Date": "2026-10-31T00:00:00",
-    "R_TER": 1.43,
-    "D_TER": 0.78,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.39,
+    "D_TER": 0.74,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "NAVI/O/O /FOO/21/12/0013",
@@ -15069,307 +15069,307 @@
     "NSDLSchemeCode": "QNTM/O/H/AHF/01/02/0005",
     "Scheme_Name": "Quant Aggressive Hybrid Fund",
     "SchemeCat_Desc": "Hybrid Scheme - Aggressive Hybrid Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.71,
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.72,
     "D_TER": 1.48,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/H/ARB/25/02/0028",
     "Scheme_Name": "quant Arbitrage Fund",
     "SchemeCat_Desc": "Hybrid Scheme - Arbitrage Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.25,
-    "D_TER": 1.62,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.26,
+    "D_TER": 1.63,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/03/0020",
     "Scheme_Name": "quant BFSI Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.59,
-    "D_TER": 2.08,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.54,
+    "D_TER": 2.04,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/03/0019",
     "Scheme_Name": "quant Business Cycle Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.99,
-    "D_TER": 1.47,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.98,
+    "D_TER": 1.46,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/11/0025",
     "Scheme_Name": "quant Commodities Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.2,
-    "D_TER": 1.78,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.14,
+    "D_TER": 1.73,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/11/0026",
     "Scheme_Name": "quant Consumption Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.28,
-    "D_TER": 1.83,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.24,
+    "D_TER": 1.78,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/DAA/23/02/0018",
     "Scheme_Name": "quant Dynamic Asset Allocation Fund",
     "SchemeCat_Desc": "Hybrid Scheme - Dynamic Asset Allocation or Balanced Advantage",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3,
-    "D_TER": 1.55,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.98,
+    "D_TER": 1.53,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/ELS/00/03/0002",
     "Scheme_Name": "Quant ELSS Tax Saver Fund",
     "SchemeCat_Desc": "Equity Scheme - ELSS",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.16,
-    "D_TER": 1.33,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.14,
+    "D_TER": 1.3,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/H/ESF/25/06/0029",
     "Scheme_Name": "quant Equity Savings Fund",
     "SchemeCat_Desc": "Hybrid Scheme - Equity Savings",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.73,
-    "D_TER": 1.99,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.65,
+    "D_TER": 1.91,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/20/09/0012",
     "Scheme_Name": "quant ESG Integration Strategy Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.33,
-    "D_TER": 1.84,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.29,
+    "D_TER": 1.8,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/FCF/08/08/0011",
     "Scheme_Name": "Quant Flexi Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Flexi Cap Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.2,
-    "D_TER": 1.13,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.21,
+    "D_TER": 1.14,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/FOC/08/07/0010",
     "Scheme_Name": "Quant Focused Fund",
     "SchemeCat_Desc": "Equity Scheme - Focused Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.35,
-    "D_TER": 1.93,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.3,
+    "D_TER": 1.88,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/D/GIL/22/11/0017",
     "Scheme_Name": "quant Gilt Fund",
     "SchemeCat_Desc": "Debt Scheme - Gilt Fund",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 1.59,
     "D_TER": 0.4,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/04/0021",
     "Scheme_Name": "quant Healthcare Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.19,
-    "D_TER": 1.62,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.14,
+    "D_TER": 1.57,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/O/FOD/26/06/0031",
     "Scheme_Name": "quant Income Plus Arbitrage Active FOF",
     "SchemeCat_Desc": "Fund of Funds Scheme (Domestic) - Fund of Funds Scheme (Domestic)",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 0.71,
-    "D_TER": 0.34,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 0.68,
+    "D_TER": 0.31,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/07/07/0009",
     "Scheme_Name": "Quant Infrastructure Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.29,
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.28,
     "D_TER": 1.14,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/LMF/06/11/0008",
     "Scheme_Name": "Quant Large & Mid Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Large & Mid Cap Fund",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 2.42,
-    "D_TER": 1.25,
-    "Month": "10-2026"
+    "D_TER": 1.24,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/LCF/22/05/0015",
     "Scheme_Name": "quant Large Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Large Cap Fund",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 2.87,
-    "D_TER": 1.51,
-    "Month": "10-2026"
+    "D_TER": 1.52,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/D/LIF/05/09/0007",
     "Scheme_Name": "Quant Liquid Fund",
     "SchemeCat_Desc": "Debt Scheme - Liquid Fund",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 0.59,
     "D_TER": 0.31,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/04/0022",
     "Scheme_Name": "quant Manufacturing Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.89,
-    "D_TER": 1.49,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.87,
+    "D_TER": 1.47,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/MIF/01/02/0003",
     "Scheme_Name": "Quant Mid Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Mid Cap Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.19,
-    "D_TER": 1.21,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.16,
+    "D_TER": 1.18,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/09/0024",
     "Scheme_Name": "quant Momentum Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.98,
-    "D_TER": 1.84,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.97,
+    "D_TER": 1.82,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/H/MAA/01/02/0006",
     "Scheme_Name": "Quant Multi Asset Allocation Fund",
     "SchemeCat_Desc": "Hybrid Scheme - Multi Asset Allocation",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 2.24,
     "D_TER": 1.19,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/MCF/01/02/0004",
     "Scheme_Name": "Quant Multi Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Multi Cap Fund",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 2.11,
-    "D_TER": 1.1,
-    "Month": "10-2026"
+    "D_TER": 1.09,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/O/EIN/26/09/0034",
     "Scheme_Name": "quant NIFTY 100 Index Fund",
     "SchemeCat_Desc": "Index Funds - Equity Funds",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 0.5,
-    "D_TER": 0.11,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 11.18,
+    "D_TER": 10.79,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/O/EIN/26/09/0032",
     "Scheme_Name": "quant NIFTY 50 Index Fund",
     "SchemeCat_Desc": "Index Funds - Equity Funds",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 0.38,
-    "D_TER": 0.07,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 11.09,
+    "D_TER": 10.78,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/O/EIN/26/09/0033",
     "Scheme_Name": "quant NIFTY Midcap 150 Index Fund",
     "SchemeCat_Desc": "Index Funds - Equity Funds",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 0.78,
-    "D_TER": 0.13,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 11.55,
+    "D_TER": 10.9,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/D/ONF/22/11/0016",
     "Scheme_Name": "quant Overnight Fund",
     "SchemeCat_Desc": "Debt Scheme - Overnight Fund",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 0.26,
     "D_TER": 0.19,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/11/0027",
     "Scheme_Name": "quant PSU Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.5,
-    "D_TER": 2.21,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.45,
+    "D_TER": 2.15,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/21/03/0013",
     "Scheme_Name": "quant Quantamental Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.89,
-    "D_TER": 1.58,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.87,
+    "D_TER": 1.56,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/O/OET/26/06/0030",
     "Scheme_Name": "quant Silver ETF",
     "SchemeCat_Desc": "Exchange Traded Funds (ETFs) - Silver ETF",
-    "TER_Date": "2026-10-30T00:00:00",
+    "TER_Date": "2026-11-01T00:00:00",
     "R_TER": 0,
     "D_TER": 0.6,
-    "Month": "10-2026"
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/SCF/96/09/0001",
     "Scheme_Name": "Quant Small Cap Fund",
     "SchemeCat_Desc": "Equity Scheme - Small Cap Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 1.74,
-    "D_TER": 0.99,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 1.73,
+    "D_TER": 0.98,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/THE/23/03/0023",
     "Scheme_Name": "quant Teck Fund",
     "SchemeCat_Desc": "Equity Scheme - Sectoral/ Thematic",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 3.81,
-    "D_TER": 2.35,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 3.84,
+    "D_TER": 2.37,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QNTM/O/E/VAF/21/10/0014",
     "Scheme_Name": "Quant Value Fund",
     "SchemeCat_Desc": "Equity Scheme - Value Fund",
-    "TER_Date": "2026-10-30T00:00:00",
-    "R_TER": 2.46,
-    "D_TER": 0.97,
-    "Month": "10-2026"
+    "TER_Date": "2026-11-01T00:00:00",
+    "R_TER": 2.45,
+    "D_TER": 0.96,
+    "Month": "11-2026"
   },
   {
     "NSDLSchemeCode": "QTMM/O/E/FOD/09/05/0006",
