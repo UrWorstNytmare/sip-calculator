@@ -16,6 +16,7 @@ export default function Explore() {
   const [option, setOption] = useState('All');
   const [navMin, setNavMin] = useState('');
   const [navMax, setNavMax] = useState('');
+  const [erMax, setErMax] = useState('');
   const [showInactive, setShowInactive] = useState(false);
   const [page, setPage] = useState(1);
 
@@ -50,12 +51,14 @@ export default function Explore() {
       (amc === 'All' || f.amc === amc) &&
       (plan === 'All' || f.plan === plan) &&
       (option === 'All' || f.option === option) &&
-      (f.nav === null || (f.nav >= min && f.nav <= max))
+      (f.nav === null || (f.nav >= min && f.nav <= max)) &&
+      (erMax === '' || (f.expenseRatio != null && f.expenseRatio <= Number(erMax)))
     );
 
     list = [...list].sort((a, b) => {
       let av, bv;
       if (sortBy === 'nav') { av = a.nav ?? -Infinity; bv = b.nav ?? -Infinity; }
+      else if (sortBy === 'er') { const nul = sortDir === 'asc' ? Infinity : -Infinity; av = a.expenseRatio ?? nul; bv = b.expenseRatio ?? nul; }
       else if (sortBy === 'cagr1y') { av = cagrMap[a.schemeCode]?.oneYear ?? -Infinity; bv = cagrMap[b.schemeCode]?.oneYear ?? -Infinity; }
       else { av = a.schemeName; bv = b.schemeName; }
       if (av < bv) return sortDir === 'asc' ? -1 : 1;
@@ -64,7 +67,7 @@ export default function Explore() {
     });
 
     return list;
-  }, [baseList, query, category, amc, plan, option, navMin, navMax, sortBy, sortDir, cagrMap]);
+  }, [baseList, query, category, amc, plan, option, navMin, navMax, erMax, sortBy, sortDir, cagrMap]);
 
   const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
   const pageRows = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
@@ -146,6 +149,11 @@ export default function Explore() {
             <input type="number" className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
               value={navMax} onChange={e => { setNavMax(e.target.value); resetPage(); }} />
           </div>
+          <div>
+            <label className="block text-xs font-medium text-slate-500 mb-1">Max Expense Ratio (%)</label>
+            <input type="number" step="0.01" className="w-full border border-slate-300 rounded-lg px-3 py-2 text-sm"
+              value={erMax} onChange={e => { setErMax(e.target.value); resetPage(); }} />
+          </div>
           <div className="flex items-end">
             <label className="flex items-center gap-2 text-sm text-slate-600">
               <input type="checkbox" checked={showInactive} onChange={e => { setShowInactive(e.target.checked); resetPage(); }} />
@@ -174,6 +182,7 @@ export default function Explore() {
                   <th className="py-2 px-3">Category</th>
                   <th className="py-2 px-3">Plan / Option</th>
                   <th className="py-2 px-3 cursor-pointer" onClick={() => toggleSort('nav')}>NAV (₹) {sortBy === 'nav' && (sortDir === 'asc' ? '↑' : '↓')}</th>
+                  <th className="py-2 px-3 cursor-pointer" onClick={() => toggleSort('er')}>Expense Ratio {sortBy === 'er' && (sortDir === 'asc' ? '↑' : '↓')}</th>
                   <th className="py-2 px-3 cursor-pointer" onClick={() => toggleSort('cagr1y')}>1Y CAGR {sortBy === 'cagr1y' && (sortDir === 'asc' ? '↑' : '↓')}</th>
                 </tr>
               </thead>
@@ -185,11 +194,12 @@ export default function Explore() {
                     <td className="py-1.5 px-3">{f.category}</td>
                     <td className="py-1.5 px-3">{f.plan || '—'} / {f.option || '—'}</td>
                     <td className="py-1.5 px-3">{f.nav?.toFixed(2) ?? 'Inactive'}</td>
+                    <td className="py-1.5 px-3">{f.expenseRatio != null ? `${f.expenseRatio.toFixed(2)}%` : '—'}</td>
                     <td className="py-1.5 px-3">{cagrMap[f.schemeCode]?.oneYear != null ? `${cagrMap[f.schemeCode].oneYear.toFixed(2)}%` : '—'}</td>
                   </tr>
                 ))}
                 {pageRows.length === 0 && (
-                  <tr><td colSpan={6} className="py-6 text-center text-slate-400">No funds match these filters.</td></tr>
+                  <tr><td colSpan={7} className="py-6 text-center text-slate-400">No funds match these filters.</td></tr>
                 )}
               </tbody>
             </table>
@@ -203,7 +213,7 @@ export default function Explore() {
             className="px-3 py-1.5 rounded-lg bg-slate-200 disabled:opacity-40 text-sm">Next</button>
         </div>
 
-        <p className="text-xs text-slate-400 mt-6">Expense ratio and fund size (AUM) filters are coming — we found a real official free source and are wiring it up next. "Load Returns" fetches CAGR only for the 50 funds currently on screen to keep things fast.</p>
+        <p className="text-xs text-slate-400 mt-6">Expense ratio is from AMFI's monthly TER disclosure (not available for closed/matured schemes). Fund size (AUM) filter is coming. "Load Returns" fetches CAGR only for the 50 funds currently on screen to keep things fast.</p>
       </div>
     </main>
   );
