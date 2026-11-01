@@ -480,6 +480,7 @@ export default function Home() {
                   <p><strong>{f.detail.schemeName}</strong></p>
                   <p>Fund House: {f.detail.fundHouse} · Category: {f.detail.schemeCategory}</p>
                   <p>Latest NAV: ₹{f.detail.latestNav?.toFixed(2)} (as of {f.detail.latestDate})</p>
+                  <p>Expense Ratio: {f.detail.expenseRatio != null ? `${f.detail.expenseRatio.toFixed(2)}%` : 'N/A'}</p>
                   <p>
                     CAGR — 6M: {fmtPct(f.detail.cagr.sixMonth)} | 1Y: {fmtPct(f.detail.cagr.oneYear)} | 3Y: {fmtPct(f.detail.cagr.threeYear)} | 5Y: {fmtPct(f.detail.cagr.fiveYear)}
                   </p>
